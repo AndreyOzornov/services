@@ -1,0 +1,16 @@
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/conf/Startup.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/library/document/MongoUser.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/library/document/MongoAccessToken.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/library/MongoClientDetailsService.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/conf/CorsFilter.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/conf/AuthServerConfig.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/library/document/MongoAuthorizationCode.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/library/MongoTokenStore.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/library/document/MongoRefreshToken.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/library/MongoAuthorizationCodeServices.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/AuthServer.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/library/MongoUserDetailsService.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/conf/AuthServerSecurityConfig.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/conf/OAuthTokenStoreConfig.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/library/converter/SerializableObjectConverter.java
+/home/andrey/Documents/microservices/services/auth-server/src/main/java/mongoauthserver/library/document/MongoClientDetails.java

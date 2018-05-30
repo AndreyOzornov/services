@@ -3,10 +3,8 @@
 #-----------------------------------------------------------------------------------------------------
 FROM openjdk:8u121-jdk-alpine
 
-MAINTAINER Anil Allewar <anilallewar@yahoo.co.in>
-
-# Keep consistent with build.gradle 
-ENV APP_JAR_NAME basic-webservice-registry
+# Keep consistent with build.gradle
+ENV APP_JAR_NAME webservice-registry
 ENV APP_JAR_VERSION 0.0.1
 
 # Install curl

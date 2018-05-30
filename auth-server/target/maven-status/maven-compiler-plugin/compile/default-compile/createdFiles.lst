@@ -1,0 +1,16 @@
+mongoauthserver/conf/AuthServerConfig.class
+mongoauthserver/library/document/MongoRefreshToken.class
+mongoauthserver/conf/AuthServerSecurityConfig.class
+mongoauthserver/AuthServer.class
+mongoauthserver/library/MongoAuthorizationCodeServices.class
+mongoauthserver/library/document/MongoAuthorizationCode.class
+mongoauthserver/library/converter/SerializableObjectConverter.class
+mongoauthserver/conf/Startup.class
+mongoauthserver/library/MongoUserDetailsService.class
+mongoauthserver/conf/CorsFilter.class
+mongoauthserver/conf/OAuthTokenStoreConfig.class
+mongoauthserver/library/MongoTokenStore.class
+mongoauthserver/library/document/MongoUser.class
+mongoauthserver/library/document/MongoClientDetails.class
+mongoauthserver/library/document/MongoAccessToken.class
+mongoauthserver/library/MongoClientDetailsService.class

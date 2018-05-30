@@ -4,10 +4,8 @@ This repository is an example of how to get Microservices going using Spring Boo
 It also builds on distributed system concepts and tries to provide solutions for common distributed system problem using implementations for circuit breakers, consumer driven contracts etc.
 
 # Table of Content
-* [Contributors](#contributors)
 * [Application Architecture](#application-architecture)
 * [Using the application](#using-application)
-    * [Running on local m/c](#run_local_mc)
     * [Running using docker](#run_docker)
 * [Microservices Overview](#microservices-overview)
 * [Netflix OSS](#netflix-oss)
@@ -18,77 +16,37 @@ It also builds on distributed system concepts and tries to provide solutions for
 * [OAuth 2.0 Overview](#oauth-2.0-overview)
 * [Spring OAuth 2.0 Overview](#spring-oauth-2.0-overview)
 
-
-## <a name="contributors"></a>Contributors
-
-* [Anil Allewar](https://www.linkedin.com/pub/anil-allewar/18/378/393)
-
 ## <a name="application-architecture"></a>Application Architecture
 
-The application consists of 9 different services
+The application consists of 5 different services
 
 * [config server](config-server/README.md) - setup external configuration
 * [webservice-registry](webservice-registry/README.md) - Eureka server
 * [auth-server](auth-server/README.md) - Oauth2 authorization server
-* [user-webservice](user-webservice/README.md) - User micro-service
-* [task-webservice](task-webservice/README.md) - Task micro-service
-* [comments-webservice](comments-webservice/README.md) - Comments for task micro-service
 * [api-gateway](api-gateway/README.md) - API gateway that proxies all the micro-services
-* [web-portal](web-portal/README.md) - Single Page Application that provides the UI
 * [zipkin-server](zipkin-server/README.md) - Single Page Application that provides the UI
 
 ### Target Architecture
-![Target Architecture](/images/Target_Architecture.jpg)
-
-### Application Components
-![Components](/images/Application_Components.jpg)
-
-## <a name="using-application"></a>Using the application
-
-### <a name="run_local_mc"></a>Running on local m/c
-
-* You can build all the projects by running the `./build-all-projects.sh` on Mac/Linux systems and then going to each individual folder and running the jars using the `java -jar build/libs/basic-<application_name>.jar` command.
-* Please refer to the individual readme files on instructions of how to run the services. For demo, you can run the applications in the same order listed above.
+![Target Architecture](/images/Target_Architecture.png)
 
 ### <a name="run_docker"></a>Running using docker
 * [Docker](https://www.docker.com) is an open platform for building, shipping and running distributed applications. Follow steps on the site to install docker based on your operating system.
 * On the mac command prompt, navigate to the root folder of the application (spring-boot-microservices) and run the `./docker-image-all-projects.sh` command. This should build all the images and publish them to docker.
 * Run the individual images as below
     * Config Server
-        * docker run -d --name config-server -p 8888:8888 anilallewar/config-server
+        * docker run -d --name config-server -p 8888:8888 config-server
         * docker logs -f config-server
     * Eureka Server
-        * docker run -d --name registry-server -p 8761:8761 anilallewar/webservice-registry
-        * docker logs -f registry-server
+        * docker run -d --name webservice-registry -p 8761:8761 webservice-registry
+        * docker logs -f webservice-registry
     * OAuth Server
-        * docker run -d --name auth-server -p 8899:8899 anilallewar/auth-server
+        * docker run -d --name auth-server -p 8899:8899 auth-server
         * docker logs -f auth-server
-    * User Webservice    
-        * docker run -d --name user-webservice anilallewar/user-webservice
-        * docker logs -f user-web service
-    * Task Webservice    
-        * docker run -d --name task-webservice anilallewar/task-webservice
-        * docker logs -f task-webservice
-    * Comments Webservice    
-        * docker run -d --name comments-webservice anilallewar/comments-webservice
-        * docker logs -f comments-webservice
-    * Web Portal    
-        * docker run -d --name web-portal anilallewar/web-portal
-        * docker logs -f web-portal
     * Zuul API Gateway    
-        * docker run -d --name api-gateway -p 8080:8080 anilallewar/api-gateway
+        * docker run -d --name api-gateway -p 8080:8080 api-gateway
         * docker logs -f api-gateway
-* We also have a [docker-compose](https://docs.docker.com/compose/) file under `docker-orchestration/docker-compose` folder that can be used to start all the containers together using `docker-compose up -d` command on the command prompt. The docker-compose file has been updated to start the containers in the correct order. You can similarly stop the containers using `docker-compose down` command on the command prompt.
-* You can also use [Rancher](http://rancher.com/) for orchestrating your containers and managing them. To setup Rancher on your local box and use it to run the containers
-   * We would run rancher for test using non-persistent storage. In production, you would typically run rancher using external mysql database and in High Availability (HA) configuration.
-   * Run the `sudo docker run -d --restart=unless-stopped -p 8080:8080 rancher/server:stable` command on the command prompt to start the latest stable rancher server.
-   * You can now access Rancher at http://<host public ip>:8080/
-   * You can now add hosts to the Rancher setup and then deploy our services using the docker-compose and rancher-compose files available under `docker-orchestration/rancher` folder. For more details on Rancher and how to run the orchestration, please refer to [Rancher documentation](http://rancher.com/docs/rancher/v1.6/en/).
+* We also have a [docker-compose](https://docs.docker.com/compose/) file under `docker-compose` folder that can be used to start all the containers together using `docker-compose up -d` command on the command prompt. The docker-compose file has been updated to start the containers in the correct order. You can similarly stop the containers using `docker-compose down` command on the command prompt.
 
-
-* Note:
-    * If the gradle wrapper doesn't work, then install gradle and run `gradle wrapper --gradle-version 3.5` before using `gradlew`.
-    * If you need to setup the classpath correctly, then run `./gradlew clean build eclipse` which would setup the `.classpath` accordingly.
 
 ## <a name="microservices-overview"></a>Microservices Overview
 
@@ -154,52 +112,7 @@ Folks who are familiar with Spring frameworks like Spring MVC, know spring is al
 
 Spring Boot is Spring's approach towards Convention over Configuration. Spring Boot comes with numerous Start Projects, each starter projects provides a set of conventions which ensures you have a opinionated production ready app.
 
-To begin with Spring Boot allows you to write web services with just One or two classes. See the example below
-
-```
-build.gradle
-gradle dependency --> compile("org.springframework.boot:spring-boot-starter-web")
-```
-
-```
-Application.java
-
-@SpringBootApplication
-public class Application{
-   public static void main(String[] args){
-      SpringApplication.run(Application.class, args);
-   }
-}
-```
-
-```
-UserController.java
-
-@RestController
-public class UserController{
-    @RequestMapping("/")
-    public User getUser(String id) {
-        return new User(id,"firstName","lastName");
-    }
-
-}
-```
-
-Build
-```
-$>./gradlew clean build
-say this Generates app.jar
-```
-
-Running Application
-```
-$>java -jar builds/lib/app.jar
-```
-
-The idea is to have multiple projects like above, one for each microservice. Look at the following directories in this repo
-* https://github.com/rohitghatol/spring-boot-microservices/tree/master/user-webservice
-* https://github.com/rohitghatol/spring-boot-microservices/tree/master/task-webservice
-
+To begin with Spring Boot allows you to write web services with just One or two classes.
 
 You can read in detail about Spring Boot here - https://spring.io/guides/gs/spring-boot/
 
